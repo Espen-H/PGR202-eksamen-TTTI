@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Button
+            android:text="History"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/start_users"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@+id/start_2player" android:layout_marginEnd="148dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="148dp"/>
+    <Button
+            android:text="Start with 2 players"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/start_2player"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@+id/start_vsAI" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"/>
+
+    <Button
+            android:id="@+id/start_vsAI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="148dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="148dp"
+            android:text="Start vs AI"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+            android:id="@+id/player_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="placeholder"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" style="@style/gameTitle"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
