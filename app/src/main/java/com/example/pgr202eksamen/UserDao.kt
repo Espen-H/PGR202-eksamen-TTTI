@@ -5,18 +5,22 @@ import androidx.room.*
 
 @Dao
 interface UserDao {
-    @Query("SELECT * FROM user ORDER BY Score DESC")
-    fun getAll(): LiveData<List<User>>
+    @Query("SELECT * FROM Users ORDER BY score DESC")
+    fun allUsersLive(): LiveData<List<User>>
 
-    @Query("SELECT * FROM user WHERE userName LIKE :username LIMIT 1")
+    @Query("SELECT * FROM Users ORDER BY score DESC")
+    fun allUsers(): List<User>
+
+    @Query("SELECT * FROM Users WHERE Username LIKE :username LIMIT 1")
     fun findByName(username: String): User
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(User: User)
 
     @Update
-    fun update(User: User)
+    fun update(username: User)
 
     @Delete
-    fun delete(User: User)
+    fun delete(username: User)
+
 }
