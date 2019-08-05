@@ -27,6 +27,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             replaceFragment("Start")
         }
+        Thread {
+        if(database.userDao().findByName("TTTBot").userName != "TTTBot") run {
+            val TTTBot: User = User(0, "TTTBot", 0)
+            database.userDao().insert(TTTBot)
+        }}
     }
 
     // When the back button is pressed
@@ -67,10 +72,11 @@ class MainActivity : AppCompatActivity() {
     fun replaceFragment(string: String) {
         val fragmentManager = supportFragmentManager
         when (string) {
-            "Ai" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, GameFragment("Ai")).commit()
-            "2P" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, GameFragment("2P")).commit()
+            "Ai" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, GameFragment("Ai")).addToBackStack("Ai").commit()
+            "2P" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, GameFragment("2P")).addToBackStack("2P").commit()
             "Signup" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, SignUpFragment()).commit()
-            "Start" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, StartFragment()).commit()
+            "Start" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, StartFragment()).addToBackStack("Start").commit()
+            "History" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, HistoryFragment()).addToBackStack("History").commit()
         }
     }
 }

@@ -10,7 +10,7 @@ class GameFragment(val mode: String) : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val viewOfLayout = inflater.inflate(R.layout.fragment_sign_up, container, false)
+        val viewOfLayout = inflater.inflate(R.layout.fragment_game, container, false)
 
         return viewOfLayout
 

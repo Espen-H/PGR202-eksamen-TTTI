@@ -46,8 +46,8 @@ class StartFragment : Fragment() {
         }
 
         btnUsers.setOnClickListener {
-            Toast.makeText((activity), "Checking out users", Toast.LENGTH_SHORT).show()
-            (activity as MainActivity).replaceFragment("Users")
+            Toast.makeText((activity), "Checking out the score history", Toast.LENGTH_SHORT).show()
+            (activity as MainActivity).replaceFragment("History")
 
         }
 
