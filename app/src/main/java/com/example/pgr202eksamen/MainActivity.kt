@@ -5,23 +5,27 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.room.Room
-import androidx.room.RoomDatabase
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var sharedPref: SharedPreferences
-    private lateinit var users: AppDatabase
+
+    companion object {
+        lateinit var database: AppDatabase
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         sharedPref = getPreferences(Context.MODE_PRIVATE)
-        users = Room.databaseBuilder(
+        database = Room.databaseBuilder(
             applicationContext,
-            AppDatabase::class.java, "users"
+            AppDatabase::class.java, "com.example.pgr202eksamen"
         ).build()
         if (!sharedPref.contains("active_player")) {
             replaceFragment("Signup")
+        } else {
+            replaceFragment("Start")
         }
     }
 
@@ -45,16 +49,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Inserts user into the database
-    fun instertUserInfo(user: String) {
-        val newUser: User = User(0, user,0)
-        users.userDao().insert(newUser)
+    fun insertUserInfo(user: String) {
+        Thread {
+            val newUser: User = User(0, user, 0)
+            database.userDao().insert(newUser)
+        }
     }
 
     // updates the user in the database
     fun updateUserScore(user: User) {
-        users.userDao().update(user)
+        Thread {
+            database.userDao().update(user)
+        }
     }
-
 
 
     fun replaceFragment(string: String) {

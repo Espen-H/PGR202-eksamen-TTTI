@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -28,6 +27,8 @@ dependencies {
     def room_version = "2.2.0-alpha01" // 2.1.0 for latest stable version
     testImplementation "androidx.room:room-testing:$room_version"
     implementation "androidx.room:room-runtime:$room_version"
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.core:core-ktx:1.0.2'

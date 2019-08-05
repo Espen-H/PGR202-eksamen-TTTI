@@ -12,66 +12,64 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
-        <TextView
-                android:id="@+id/active_player"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="start"
-                android:text="@string/active_player"
-                android:textSize="30sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+            android:id="@+id/active_player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="start"
+            android:text="active_player1"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
-        <TextView
-                android:id="@+id/player_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:gravity="start"
-                android:text="@string/score_p1"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/active_player"
-                app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+            android:id="@+id/player_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="score_p1"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/active_player"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-                android:id="@+id/active_player2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="start"
-                android:text="@string/active_player2"
-                android:textSize="30sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/active_player" />
+    <TextView
+            android:id="@+id/active_player2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="start"
+            android:text="active_player2"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/active_player"/>
 
-        <TextView
-                android:id="@+id/player_score2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="21dp"
-                android:layout_weight="1"
-                android:gravity="start"
-                android:text="@string/score_p2"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/active_player2"
-                app:layout_constraintTop_toBottomOf="@+id/player_score" />
+    <TextView
+            android:id="@+id/player_score2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="21dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="score_p2"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/active_player2"
+            app:layout_constraintTop_toBottomOf="@+id/player_score"/>
 
-        <TextView
-                android:id="@+id/current_turn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="48dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_conversion_absoluteHeight="19dp"
-                tools:layout_conversion_absoluteWidth="376dp"
-                tools:text="placeholder" />
+    <TextView
+            android:id="@+id/current_turn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="current turn"/>
 
 
 
@@ -96,124 +94,124 @@
 
             <Button
                     android:id="@+id/b0"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
 
             <Button
                     android:id="@+id/b1"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
 
             <Button
                     android:id="@+id/b2"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
 
             <Button
                     android:id="@+id/b3"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
         </TableRow>
 
         <TableRow android:gravity="center">
 
             <Button
                     android:id="@+id/b4"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
 
             <Button
                     android:id="@+id/b5"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
 
             <Button
                     android:id="@+id/b6"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
 
             <Button
                     android:id="@+id/b7"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
         </TableRow>
 
         <TableRow android:gravity="center">
 
             <Button
                     android:id="@+id/b8"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
 
             <Button
                     android:id="@+id/b9"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
 
             <Button
                     android:id="@+id/b10"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
 
             <Button
                     android:id="@+id/b11"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
         </TableRow>
 
         <TableRow android:gravity="center">
 
             <Button
                     android:id="@+id/b12"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
 
             <Button
                     android:id="@+id/b13"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
 
             <Button
                     android:id="@+id/b14"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
 
             <Button
                     android:id="@+id/b15"
-                    style="@style/Widget.AppCompat.ImageButton"
+                    style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"/>
         </TableRow>
     </TableLayout>
 
@@ -224,12 +222,12 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
-            android:text="@string/reset"
+            android:text="reset"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout" android:background="#00ADADAD"/>
 
     <Chronometer
             android:id="@+id/chronometer"
