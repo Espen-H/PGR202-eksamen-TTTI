@@ -11,4 +11,10 @@ class UserRepository (private val userDao: UserDao) {
     fun insert(user: User) {
         userDao.insert(user)
     }
+
+    @WorkerThread
+    fun getUser(username: String): User {
+        return userDao.findByName(username)
+
+    }
 }

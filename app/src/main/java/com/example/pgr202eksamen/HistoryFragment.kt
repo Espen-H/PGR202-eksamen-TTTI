@@ -23,6 +23,11 @@ class HistoryFragment : Fragment() {
 
     }
 
+    /*
+        #TODO
+        Find out if the livedata observer is properly destroyed or not
+     */
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         recycleViewScore = scoreboardRV

@@ -28,5 +28,8 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     fun insert(user: User) = scope.launch(Dispatchers.IO) {
         repository.insert(user)
     }
+    fun getUser(username: String):User {
+       return repository.getUser(username)
+    }
 
 }

@@ -19,7 +19,7 @@ class StartFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)!!
-        activePlayer =  sharedPref.getString("active_player", null)!!
+        activePlayer =  sharedPref.getString("active_player", "")!!
 
     }
 
@@ -40,13 +40,13 @@ class StartFragment : Fragment() {
         }
 
         btnStart2Player.setOnClickListener {
-            Toast.makeText((activity), "This use this feature, you have to buy the multiplayer dlc for only $4.99", Toast.LENGTH_LONG).show()
+            Toast.makeText((activity), "Starting game in 2 player mode", Toast.LENGTH_LONG).show()
             (activity as MainActivity).replaceFragment("2P")
 
         }
 
         btnUsers.setOnClickListener {
-            Toast.makeText((activity), "Checking out the score history", Toast.LENGTH_SHORT).show()
+            Toast.makeText((activity), "Checking out the scoreboard", Toast.LENGTH_SHORT).show()
             (activity as MainActivity).replaceFragment("History")
 
         }
