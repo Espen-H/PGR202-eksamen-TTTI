@@ -46,8 +46,8 @@ class MainActivity : AppCompatActivity() {
     fun replaceFragment(string: String) {
         val fragmentManager = supportFragmentManager
         when (string) {
-            "Ai" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, GameFragment("Ai", activeUser, "" )).addToBackStack("Ai").commit()
-            "2P" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, GameFragment("2P", activeUser, "")).addToBackStack("2P").commit()
+            "Ai" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, GameFragment("Ai", activeUser )).addToBackStack("Ai").commit()
+            "2P" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, GameFragment("2P", activeUser )).addToBackStack("2P").commit()
             "Signup" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, SignUpFragment()).commit()
             "Start" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, StartFragment()).addToBackStack("Start").commit()
             "History" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, HistoryFragment()).addToBackStack("History").commit()

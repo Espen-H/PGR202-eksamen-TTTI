@@ -23,13 +23,18 @@ class GameFragment(val mode: String, var player1: String) : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var player2 = ""
+        viewOfLayout = inflater.inflate(R.layout.fragment_game, container, false)
+        player1Name = viewOfLayout.findViewById(R.id.active_player)
+        player1Score = viewOfLayout.findViewById(R.id.player_score)
+        player2Name = viewOfLayout.findViewById(R.id.active_player2)
+        player2Name = viewOfLayout.findViewById(R.id.player_score2)
+
+        var player2 = "placeholder"
         when(mode) {
           "Ai" -> player2 = "TTTBot"
-          "2P" ->
+          "2P" -> player2 = "NYI"
         }
 
-        viewOfLayout = inflater.inflate(R.layout.fragment_game, container, false)
         gameTime = viewOfLayout.findViewById(R.id.chronometer)
         userModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
         player1Name.text = userModel.getUser(player1).userName

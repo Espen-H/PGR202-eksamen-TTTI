@@ -1,6 +1,7 @@
 package com.example.pgr202eksamen
 
 import android.app.Application
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.CoroutineScope
@@ -28,7 +29,8 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     fun insert(user: User) = scope.launch(Dispatchers.IO) {
         repository.insert(user)
     }
-    fun getUser(username: String):User {
+
+   suspend fun getUser(username: String):User =  {
        return repository.getUser(username)
     }
 
