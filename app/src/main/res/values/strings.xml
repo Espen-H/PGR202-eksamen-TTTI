@@ -2,5 +2,6 @@
     <string name="app_name">PGR202 Eksamen</string>
     <string name="signup_start_button">Start</string>
     <string name="game_title">Tic Tac Toe the Improved</string>
-    <string name="username_hint">enter your username here</string>
+    <string name="username_hint">Username</string>
+    <string name="player_turn">%1$s its your turn</string>
 </resources>

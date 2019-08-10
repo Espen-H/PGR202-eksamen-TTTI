@@ -119,28 +119,29 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center" style="@android:style/Widget.Button"
-                    android:textSize="24sp"/>
+                    android:textSize="24sp" android:contentDescription="btn0" android:text=" "/>
 
             <Button
                     android:id="@+id/b1"
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:contentDescription="btn1"
+                    android:text=" "/>
 
             <Button
                     android:id="@+id/b2"
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:text=" "/>
 
             <Button
                     android:id="@+id/b3"
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:text=" "/>
         </TableRow>
 
         <TableRow android:gravity="center">
@@ -150,28 +151,28 @@
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:text=" "/>
 
             <Button
                     android:id="@+id/b5"
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:text=" "/>
 
             <Button
                     android:id="@+id/b6"
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:text=" "/>
 
             <Button
                     android:id="@+id/b7"
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:text=" "/>
         </TableRow>
 
         <TableRow android:gravity="center">
@@ -181,28 +182,28 @@
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:text=" "/>
 
             <Button
                     android:id="@+id/b9"
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:text=" "/>
 
             <Button
                     android:id="@+id/b10"
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:text=" "/>
 
             <Button
                     android:id="@+id/b11"
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:text=" "/>
         </TableRow>
 
         <TableRow android:gravity="center">
@@ -212,28 +213,28 @@
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:text=" "/>
 
             <Button
                     android:id="@+id/b13"
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:text=" "/>
 
             <Button
                     android:id="@+id/b14"
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:text=" "/>
 
             <Button
                     android:id="@+id/b15"
                     style="@android:style/Widget.Button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center" android:textSize="24sp"/>
+                    android:layout_gravity="center" android:textSize="24sp" android:text=" "/>
         </TableRow>
     </TableLayout>
 

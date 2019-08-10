@@ -8,24 +8,30 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProviders
+import kotlinx.android.synthetic.main.alert_dialog_edittext.*
+
 
 class StartFragment : Fragment() {
 
     private lateinit var sharedPref: SharedPreferences
     private lateinit var activePlayer: String
+    private lateinit var userModel: UserViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)!!
-        activePlayer =  sharedPref.getString("active_player", "")!!
+        activePlayer = sharedPref.getString("active_player", "")!!
 
     }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_start, container, false)
+        userModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
         val btnStartAI: Button = view.findViewById(R.id.start_vsAI)
         val btnStart2Player: Button = view.findViewById(R.id.start_2player)
         val btnUsers: Button = view.findViewById(R.id.start_users)
@@ -35,18 +41,27 @@ class StartFragment : Fragment() {
         welcomeMessage.text = welcomeText
 
         btnStartAI.setOnClickListener {
-            Toast.makeText((activity), "Starting game vs AI", Toast.LENGTH_SHORT).show()
             (activity as MainActivity).replaceFragment("Ai")
         }
 
-        btnStart2Player.setOnClickListener {
-            Toast.makeText((activity), "Starting game in 2 player mode", Toast.LENGTH_LONG).show()
-            (activity as MainActivity).replaceFragment("2P")
+        fun newUserDialog() {
+            val builder = context?.let { AlertDialog.Builder(it) }
+            val inflater = requireActivity().layoutInflater
+            builder!!.setView(inflater.inflate(R.layout.alert_dialog_edittext, null))
+                .setPositiveButton("Finish") { dialog, id ->
+                    val username = editText.text.toString()
+                    val newUser = User(username, 0)
+                    userModel.insert(newUser)
+                }
+            builder.create()
+        }
 
+
+        btnStart2Player.setOnClickListener {
+           // (activity as MainActivity).replaceFragment("2P")
         }
 
         btnUsers.setOnClickListener {
-            Toast.makeText((activity), "Checking out the scoreboard", Toast.LENGTH_SHORT).show()
             (activity as MainActivity).replaceFragment("History")
 
         }

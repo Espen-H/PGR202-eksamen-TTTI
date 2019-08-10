@@ -1,7 +1,6 @@
 package com.example.pgr202eksamen
 
 import android.app.Application
-import androidx.annotation.WorkerThread
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.CoroutineScope
@@ -12,7 +11,7 @@ import kotlin.coroutines.CoroutineContext
 
 
 class UserViewModel(application: Application) : AndroidViewModel(application) {
-    private val  repository: UserRepository
+    private val repository: UserRepository
     val allUsers: LiveData<List<User>>
 
     private var parentJob = Job()
@@ -30,8 +29,15 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         repository.insert(user)
     }
 
-   suspend fun getUser(username: String):User =  {
-       return repository.getUser(username)
+    fun getUser(username: String): User {
+        return repository.getUser(username)
     }
 
+    fun getUsers(): List<User> {
+        return repository.getUsers()
+    }
+
+    fun updateUser(user: User) = scope.launch(Dispatchers.IO) {
+        repository.update(user)
+    }
 }

@@ -34,6 +34,7 @@ class SignUpFragment : Fragment() {
             val newUser = User(usernameText, 0)
             (activity as MainActivity).updateSharedPref(usernameText)
             userModel.insert(newUser)
+            userModel.insert(User("TTTBot", 0))
             (activity as MainActivity).replaceFragment("Start")
         }
         return viewOfLayout

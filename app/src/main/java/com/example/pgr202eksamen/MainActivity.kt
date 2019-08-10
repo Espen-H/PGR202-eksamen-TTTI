@@ -9,11 +9,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var sharedPref: SharedPreferences
     private lateinit var activeUser: String
+    lateinit var player2:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         sharedPref = getPreferences(Context.MODE_PRIVATE)
+
         if (!sharedPref.contains("active_player")) {
             replaceFragment("Signup")
         } else {
@@ -46,8 +48,8 @@ class MainActivity : AppCompatActivity() {
     fun replaceFragment(string: String) {
         val fragmentManager = supportFragmentManager
         when (string) {
-            "Ai" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, GameFragment("Ai", activeUser )).addToBackStack("Ai").commit()
-            "2P" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, GameFragment("2P", activeUser )).addToBackStack("2P").commit()
+            "Ai" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, GameFragment("Ai", activeUser, "TTTBot")).addToBackStack("Ai").commit()
+            "2P" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, GameFragment("2P", activeUser, player2 )).addToBackStack("2P").commit()
             "Signup" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, SignUpFragment()).commit()
             "Start" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, StartFragment()).addToBackStack("Start").commit()
             "History" -> fragmentManager.beginTransaction().replace(R.id.fragmentHolder, HistoryFragment()).addToBackStack("History").commit()
