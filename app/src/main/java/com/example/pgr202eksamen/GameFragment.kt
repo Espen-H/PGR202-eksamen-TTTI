@@ -36,7 +36,7 @@ class GameFragment(private val mode: String, private var player1: String, privat
     private lateinit var p2turn: String
     private lateinit var buttons: Array<Button>
     private var aiMoves: ArrayList<Button> = ArrayList()
-    var ongoingGame: Boolean = true
+    private var ongoingGame: Boolean = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewOfLayout = inflater.inflate(R.layout.fragment_game, container, false)
