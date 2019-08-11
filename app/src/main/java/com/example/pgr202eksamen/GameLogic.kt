@@ -1,115 +1,99 @@
 package com.example.pgr202eksamen
 
-import android.os.SystemClock
+import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.Chronometer
-
 
 class GameLogic(aiGame: Boolean) {
     private var player1: MutableList<Int> = emptyArray<Int>().toMutableList()
     private var player2: MutableList<Int> = emptyArray<Int>().toMutableList()
     var player1TurnBoolean: Boolean = true
     var aiPlayer2: Boolean = aiGame
-    var turnCounter = 0
-    lateinit var board: Array<IntArray>
-    lateinit var moveHistory: MutableList<Int>
+    private var turnCounter = 0
+    private lateinit var board: MutableMap<Int, Int>
+    private lateinit var moveHistory: MutableList<Int>
 
 
 
 
     fun setupBoard() {
-        board = Array(4) { IntArray(4) }
+        board = mapOf(0 to 0, 1 to 1, 2 to 2, 3 to 3, 4 to 4, 5 to 5, 6 to 6, 7 to 7, 8 to 8,
+                             9 to 9, 10 to 10, 12 to 12, 13 to 13, 14 to 14, 15 to 15).toMutableMap()
+        player1TurnBoolean = true
         moveHistory = emptyArray<Int>().toMutableList()
         player1 = emptyArray<Int>().toMutableList()
         player2 = emptyArray<Int>().toMutableList()
-        turnCounter = 0
-
-        //Random player starts
-        when ((0..1).random()) {
-            0 -> player1TurnBoolean = true
-            1 -> player1TurnBoolean = false
-        }
-        var numId = 0
-        for (i in 0 until board.size) {
-            val colArray = IntArray(4)
-
-            for (j in 0 until colArray.size) {
-                colArray[j] = numId++
-            }
-            board[i] = colArray
-        }
+        turnCounter = 0}
 
 
-    }
-
-    /*
-            Restricting players from choosing the same box will be done with the onClick event on the boxes
-     */
-
-    fun play(boxId: View) {
-        val boxSelected = boxId as Button
-        var boxId: Int = -1
-        when (boxSelected.id) {
+    fun play(button: View) {
+        var box = -1
+        when (button.id) {
             R.id.b0 -> {
-                boxId = 0
+                box = 0
             }
             R.id.b1 -> {
-                boxId = 1
+                box = 1
             }
             R.id.b2 -> {
-                boxId = 2
+                box = 2
             }
             R.id.b3 -> {
-                boxId = 3
+                box = 3
             }
             R.id.b4 -> {
-                boxId = 4
+                box = 4
             }
             R.id.b5 -> {
-                boxId = 5
+                box = 5
             }
             R.id.b6 -> {
-                boxId = 6
+                box = 6
             }
             R.id.b7 -> {
-                boxId = 7
+                box = 7
             }
             R.id.b8 -> {
-                boxId = 8
+                box = 8
             }
             R.id.b9 -> {
-                boxId = 9
+                box = 9
             }
             R.id.b10 -> {
-                boxId = 10
+                box = 10
             }
             R.id.b11 -> {
-                boxId = 11
+                box = 11
             }
             R.id.b12 -> {
-                boxId = 12
+                box = 12
             }
             R.id.b13 -> {
-                boxId = 13
+                box = 13
             }
             R.id.b14 -> {
-                boxId = 14
+                box = 14
             }
             R.id.b15 -> {
-                boxId = 15
+                box = 15
             }
         }
 
-        when (moveHistory.contains(boxId)) {
-            true -> illegalMove()
-            false -> legalMove(boxId)
+        when (player1TurnBoolean) {
+            true -> player1.add(box)
+            false -> player2.add(box)
         }
+
+        moveHistory.add(box)
+        Log.d("boxid", box.toString())
+        board.remove(box)
+        Log.d("after move", board.entries.toString()
+        )
+        turnCounter++
+        player1TurnBoolean = !player1TurnBoolean
     }
 
 
     fun checkWinner(): Int {
-        var winner = -1
         val winningLines: Collection<IntArray> =
             mutableListOf(
                 // horizontal
@@ -141,21 +125,5 @@ class GameLogic(aiGame: Boolean) {
         }
         return -1
     }
-
-    private fun legalMove(box: Int) {
-        when (player1TurnBoolean) {
-            true -> player1.add(box)
-            false -> player2.add(box)
-        }
-        moveHistory.add(box)
-        turnCounter++
-        player1TurnBoolean = !player1TurnBoolean
-
-    }
-
-    private fun illegalMove(): String {
-        return "You cant do that"
-    }
-
 
 }

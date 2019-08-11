@@ -3,6 +3,7 @@ package com.example.pgr202eksamen
 
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,6 @@ import android.widget.Button
 import android.widget.Chronometer
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.MainThread
-import androidx.annotation.UiThread
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_game.*
@@ -34,13 +33,14 @@ class GameFragment(private val mode: String, private var player1: String, privat
     private lateinit var turnFormat: String
     private lateinit var p1turn: String
     private lateinit var p2turn: String
+    lateinit var buttons:Array<Button>
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewOfLayout = inflater.inflate(R.layout.fragment_game, container, false)
-         turnFormat =  resources.getString(R.string.player_turn)
-         p1turn= String.format(turnFormat, player1)
-         p2turn= String.format(turnFormat, player2)
+        turnFormat = resources.getString(R.string.player_turn)
+        p1turn = String.format(turnFormat, player1)
+        p2turn = String.format(turnFormat, player2)
 
         userModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
         gameTime = viewOfLayout.findViewById(R.id.chronometer)
@@ -77,11 +77,7 @@ class GameFragment(private val mode: String, private var player1: String, privat
         val btn15: Button = viewOfLayout.findViewById(R.id.b15)
         val resetBtn: Button = viewOfLayout.findViewById(R.id.reset)
 
-        resetBtn.setOnClickListener {
-            gameLogic.setupBoard()
-        }
-
-        val buttons: Array<Button> = arrayOf(
+        buttons = arrayOf(
             btn0,
             btn1,
             btn2,
@@ -100,66 +96,84 @@ class GameFragment(private val mode: String, private var player1: String, privat
             btn15
         )
 
+
+
+        resetBtn.setOnClickListener {
+            gameLogic.setupBoard()
+            for (button in buttons) {
+                button.text = ""
+                button.isEnabled = true
+            }
+
+            gameTime.base = SystemClock.elapsedRealtime()
+            gameTime.start()
+        }
+
         fun disableButtons() {
             for (button in buttons) {
                 button.isEnabled = false
+
             }
         }
 
-        suspend fun updateUser(user: User) {
+        fun updateUser(user: User) {
             userModel.updateUser(user)
         }
 
         for (button in buttons) {
             button.isEnabled = true
+            Log.d("button id after", button.id.toString())
             button.setOnClickListener {
-                gameLogic.play(it)
-
 
                 when (gameLogic.player1TurnBoolean) {
                     true -> {
                         button.text = "X"
                         current_turn.text = p1turn
+                        gameLogic.play(it)
                     }
                     false -> {
                         button.text = "O"
                         current_turn.text = p2turn
-                    }
-                }
-                it.isEnabled = false
-                if (gameLogic.turnCounter > 6) {
-                    when (gameLogic.checkWinner()) {
-                        1 -> {
-                            disableButtons()
-                            gameTime.stop()
-                            Toast.makeText(this.context, "$player1 won the game!", Toast.LENGTH_LONG).show()
-                            user1.score++
-                            GlobalScope.launch { updateUser(user1) }
-
-
-                        }
-                        2 -> {
-                            disableButtons()
-                            gameTime.stop()
-                            Toast.makeText(this.context, "$player2 won the game!", Toast.LENGTH_LONG).show()
-                            user2.score++
-                            GlobalScope.launch { updateUser(user2) }
-
-
-                        }
-                        3 -> {
-                            disableButtons()
-                            gameTime.stop()
-                            Toast.makeText(this.context, "Its a draw", Toast.LENGTH_LONG).show()
+                        if(gameLogic.aiPlayer2){
+                            gameLogic.play(it)
                         }
                     }
-
                 }
+                when (gameLogic.checkWinner()) {
+                    1 -> {
+                        disableButtons()
+                        gameTime.stop()
+                        Toast.makeText(this.context, "$player1 won the game!", Toast.LENGTH_LONG).show()
+                        user1.score++
+                        player1Score.text = user1.score.toString()
+                        GlobalScope.launch { updateUser(user1) }
+
+
+                    }
+                    2 -> {
+                        disableButtons()
+                        gameTime.stop()
+                        Toast.makeText(this.context, "$player2 won the game!", Toast.LENGTH_LONG).show()
+                        user2.score++
+                        player2Score.text = user2.score.toString()
+
+                        GlobalScope.launch { updateUser(user2) }
+
+
+                    }
+                    3 -> {
+                        disableButtons()
+                        gameTime.stop()
+                        Toast.makeText(this.context, "Its a draw", Toast.LENGTH_LONG).show()
+                    }
+                }
+                button.isEnabled = false
+
             }
         }
-
         return viewOfLayout
     }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -178,20 +192,18 @@ class GameFragment(private val mode: String, private var player1: String, privat
             activity?.runOnUiThread { initializeUsers() }
         }
 
-        when (gameLogic.player1TurnBoolean) {
-            true -> {
-                current_turn.text = p1turn
-            }
-            false -> {
-                current_turn.text = p2turn
-            }
-        }
-
         GlobalScope.launch { getUserData() }
         gameLogic.setupBoard()
+        if (gameLogic.player1TurnBoolean) {
+            current_turn.text = p1turn
+        }else {
+            current_turn.text = p2turn
+        }
         gameTime.base = SystemClock.elapsedRealtime()
         gameTime.start()
     }
+
+
 }
 
 

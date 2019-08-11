@@ -2,7 +2,6 @@ package com.example.pgr202eksamen
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import java.net.UnknownServiceException
 
 class UserRepository (private val userDao: UserDao) {
 
