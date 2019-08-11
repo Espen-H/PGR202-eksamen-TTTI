@@ -1,1 +1,1 @@
-# PGR202-eksamen-TTTI
+# PGR202-eksamen
