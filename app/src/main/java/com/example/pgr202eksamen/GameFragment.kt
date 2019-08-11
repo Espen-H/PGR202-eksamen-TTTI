@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -33,8 +34,9 @@ class GameFragment(private val mode: String, private var player1: String, privat
     private lateinit var turnFormat: String
     private lateinit var p1turn: String
     private lateinit var p2turn: String
-    lateinit var buttons:Array<Button>
-
+    private lateinit var buttons: Array<Button>
+    private var aiMoves: ArrayList<Button> = ArrayList()
+    var ongoingGame: Boolean = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewOfLayout = inflater.inflate(R.layout.fragment_game, container, false)
@@ -97,14 +99,23 @@ class GameFragment(private val mode: String, private var player1: String, privat
         )
 
 
+        fun legalMoves() {
+            aiMoves = ArrayList()
+            for (button in buttons) {
+                aiMoves.add(button)
+            }
+        }
+        legalMoves()
 
         resetBtn.setOnClickListener {
             gameLogic.setupBoard()
+            ongoingGame = true
+            current_turn.text = p1turn
             for (button in buttons) {
                 button.text = ""
                 button.isEnabled = true
             }
-
+            legalMoves()
             gameTime.base = SystemClock.elapsedRealtime()
             gameTime.start()
         }
@@ -120,31 +131,41 @@ class GameFragment(private val mode: String, private var player1: String, privat
             userModel.updateUser(user)
         }
 
+        fun aiTurn() {
+            when (gameLogic.aiPlayer2 && !gameLogic.player1TurnBoolean) {
+                true -> {
+                    val aiMove = aiMoves.random()
+                    aiMove.performClick()
+                }
+            }
+
+
+        }
+
         for (button in buttons) {
             button.isEnabled = true
-            Log.d("button id after", button.id.toString())
             button.setOnClickListener {
 
                 when (gameLogic.player1TurnBoolean) {
                     true -> {
                         button.text = "X"
-                        current_turn.text = p1turn
+                        current_turn.text = p2turn
                         gameLogic.play(it)
                     }
                     false -> {
                         button.text = "O"
-                        current_turn.text = p2turn
-                        if(gameLogic.aiPlayer2){
-                            gameLogic.play(it)
-                        }
+                        current_turn.text = p1turn
+                        gameLogic.play(it)
                     }
                 }
+
                 when (gameLogic.checkWinner()) {
                     1 -> {
                         disableButtons()
                         gameTime.stop()
                         Toast.makeText(this.context, "$player1 won the game!", Toast.LENGTH_LONG).show()
                         user1.score++
+                        ongoingGame = false
                         player1Score.text = user1.score.toString()
                         GlobalScope.launch { updateUser(user1) }
 
@@ -155,6 +176,7 @@ class GameFragment(private val mode: String, private var player1: String, privat
                         gameTime.stop()
                         Toast.makeText(this.context, "$player2 won the game!", Toast.LENGTH_LONG).show()
                         user2.score++
+                        ongoingGame = false
                         player2Score.text = user2.score.toString()
 
                         GlobalScope.launch { updateUser(user2) }
@@ -164,20 +186,24 @@ class GameFragment(private val mode: String, private var player1: String, privat
                     3 -> {
                         disableButtons()
                         gameTime.stop()
+                        ongoingGame = false
                         Toast.makeText(this.context, "Its a draw", Toast.LENGTH_LONG).show()
                     }
                 }
                 button.isEnabled = false
-
+                aiMoves.remove(it)
+                if (ongoingGame) {
+                    aiTurn()
+                }
             }
         }
+
         return viewOfLayout
     }
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         fun initializeUsers() {
             player1Name.text = user1.userName
             player1Score.text = user1.score.toString()
@@ -192,13 +218,12 @@ class GameFragment(private val mode: String, private var player1: String, privat
             activity?.runOnUiThread { initializeUsers() }
         }
 
+
+
         GlobalScope.launch { getUserData() }
         gameLogic.setupBoard()
-        if (gameLogic.player1TurnBoolean) {
-            current_turn.text = p1turn
-        }else {
-            current_turn.text = p2turn
-        }
+
+        current_turn.text = p1turn
         gameTime.base = SystemClock.elapsedRealtime()
         gameTime.start()
     }

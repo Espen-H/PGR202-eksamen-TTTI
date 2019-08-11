@@ -78,9 +78,15 @@ class GameLogic(aiGame: Boolean) {
             }
         }
 
-        when (player1TurnBoolean) {
-            true -> player1.add(box)
-            false -> player2.add(box)
+        player1TurnBoolean = when (player1TurnBoolean) {
+            true -> {
+                player1.add(box)
+                false
+            }
+            false -> {
+                player2.add(box)
+                true
+            }
         }
 
         moveHistory.add(box)
@@ -89,7 +95,6 @@ class GameLogic(aiGame: Boolean) {
         Log.d("after move", board.entries.toString()
         )
         turnCounter++
-        player1TurnBoolean = !player1TurnBoolean
     }
 
 

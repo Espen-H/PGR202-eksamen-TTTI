@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         sharedPref = getPreferences(Context.MODE_PRIVATE)
 
         if (!sharedPref.contains("active_player")) {
+            sharedPref.getString("active_player", "placeholder")
             replaceFragment("Signup")
         } else {
             activeUser = sharedPref.getString("active_player", null)!!
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             putString("active_player", value)
             apply()
         }
+        activeUser = sharedPref.getString("active_player",null)!!
     }
 
 

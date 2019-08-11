@@ -2,16 +2,22 @@ package com.example.pgr202eksamen
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.annotation.WorkerThread
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.alert_dialog_edittext.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class StartFragment : Fragment() {
@@ -19,12 +25,12 @@ class StartFragment : Fragment() {
     private lateinit var sharedPref: SharedPreferences
     private lateinit var activePlayer: String
     private lateinit var userModel: UserViewModel
-
+    private var player2Chosen: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)!!
-        activePlayer = sharedPref.getString("active_player", "")!!
+        activePlayer = sharedPref.getString("active_player", null)!!
 
     }
 
@@ -40,25 +46,53 @@ class StartFragment : Fragment() {
         val welcomeText = "Hello $activePlayer"
         welcomeMessage.text = welcomeText
 
+
+
         btnStartAI.setOnClickListener {
             (activity as MainActivity).replaceFragment("Ai")
         }
 
-        fun newUserDialog() {
-            val builder = context?.let { AlertDialog.Builder(it) }
-            val inflater = requireActivity().layoutInflater
-            builder!!.setView(inflater.inflate(R.layout.alert_dialog_edittext, null))
-                .setPositiveButton("Finish") { dialog, id ->
-                    val username = editText.text.toString()
+        fun createOrAddPlayer2(username: String) {
+            GlobalScope.launch {
+                try {
+
+                    if (userModel.getUser(username).userName == username) {
+                        (activity as MainActivity).player2 = username
+                        player2Chosen = true
+                        (activity as MainActivity).replaceFragment("2P")
+                    }
+                } catch (e: NullPointerException) {
                     val newUser = User(username, 0)
                     userModel.insert(newUser)
+                    (activity as MainActivity).player2 = username
+                    player2Chosen = true
+                    (activity as MainActivity).replaceFragment("2P")
                 }
-            builder.create()
+            }
+        }
+
+
+        fun choosePlayer2Alert(view: View) {
+            val builder = AlertDialog.Builder(this.context!!)
+            val inflater = layoutInflater
+            builder.setTitle("Add player 2")
+            val dialogLayout = inflater.inflate(R.layout.alert_dialog_edittext, null)
+            val editText = dialogLayout.findViewById<EditText>(R.id.editText)
+            builder.setView(dialogLayout)
+            builder.setPositiveButton("OK") { dialogInterface, i -> createOrAddPlayer2(editText.text.toString()) }
+            builder.show()
         }
 
 
         btnStart2Player.setOnClickListener {
-           // (activity as MainActivity).replaceFragment("2P")
+
+            when (player2Chosen) {
+                true -> (activity as MainActivity).replaceFragment("2P")
+                false -> {
+                    choosePlayer2Alert(this.view!!)
+
+                }
+            }
         }
 
         btnUsers.setOnClickListener {
